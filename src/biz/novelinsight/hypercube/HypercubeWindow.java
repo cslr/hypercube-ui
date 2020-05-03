@@ -349,12 +349,18 @@ public class HypercubeWindow {
 		text_composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		text_composite.setLayout(new GridLayout(1, false));
 		
-		TextViewer textViewer = new TextViewer(text_composite, SWT.BORDER);
+		TextViewer textViewer = new TextViewer(text_composite, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
 		messagesText = textViewer.getTextWidget();
+		messagesText.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent arg0) {
+				messagesText.setTopIndex(messagesText.getLineCount() - 1);
+			}
+		});
 		messagesText.setTouchEnabled(true);
 		messagesText.setAlignment(SWT.CENTER);
 		messagesText.setEditable(false);
 		messagesText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
 		
 		
 		// UI internal thread:
@@ -398,7 +404,7 @@ public class HypercubeWindow {
 		    		});
 			    
 		    		try {
-		    			Thread.sleep(500);
+		    			Thread.sleep(250);
 		    		} catch (InterruptedException e) {
 		    			e.printStackTrace();
 		    		}

@@ -55,7 +55,7 @@ public class HypercubeUIModel {
 			}
 			
 			if(vstFile.isDirectory() == false) {
-				String filename = vstFile.getCanonicalPath() + File.pathSeparator + vstFile.getName();
+				String filename = vstFile.getCanonicalFile().toString();				
 				return filename;
 			}
 			else {
