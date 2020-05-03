@@ -21,10 +21,18 @@ import org.eclipse.jface.text.TextViewer;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.ModifyEvent;
 
 public class HypercubeWindow {
 
 	protected Shell shlHypercubeVst;
+	private MenuItem mntmVaeModeslow;
+	private MenuItem mntmSkipAlreadyExisting;
+	private Spinner complexitySpinner;
 	private Text text;
 
 	/**
@@ -105,7 +113,27 @@ public class HypercubeWindow {
 		});
 		mntmSelectOneVst.setText("Select one VST effect..");
 		
-		MenuItem mntmVaeModeslow = new MenuItem(menu_1, SWT.CHECK);
+		new MenuItem(menu_1, SWT.SEPARATOR);
+		
+		mntmSkipAlreadyExisting = new MenuItem(menu_1, SWT.CHECK);
+		mntmSkipAlreadyExisting.setSelection(true);
+		mntmSkipAlreadyExisting.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MenuItem item = mntmSkipAlreadyExisting;
+				System.out.println("SKIP EXISTING: " + item.getSelection());
+			}
+		});
+		mntmSkipAlreadyExisting.setText("Skip already existing VSTs");
+		
+		mntmVaeModeslow = new MenuItem(menu_1, SWT.CHECK);
+		mntmVaeModeslow.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MenuItem item = mntmVaeModeslow;
+				System.out.println("VAE SELECTED: " + item.getSelection());
+			}
+		});
 		mntmVaeModeslow.setText("VAE mode (slow)");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
@@ -150,11 +178,11 @@ public class HypercubeWindow {
 		});
 		mntmNewItem_1.setText("About Hypercube VST");
 		
-		Composite composite = new Composite(shlHypercubeVst, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		composite.setLayout(new GridLayout(2, false));
+		Composite file_composite = new Composite(shlHypercubeVst, SWT.NONE);
+		file_composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		file_composite.setLayout(new GridLayout(2, false));
 		
-		Composite composite_3 = new Composite(composite, SWT.NONE);
+		Composite composite_3 = new Composite(file_composite, SWT.NONE);
 		composite_3.setLayout(new GridLayout(1, false));
 		composite_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
@@ -164,22 +192,64 @@ public class HypercubeWindow {
 		text.setText("<select vst file or folder>");
 		text.setEditable(false);
 		
-		Composite composite_2 = new Composite(composite, SWT.NONE);
+		Composite composite_2 = new Composite(file_composite, SWT.NONE);
 		composite_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		composite_2.setLayout(new RowLayout(SWT.HORIZONTAL));
 		
 		Button btnScan = new Button(composite_2, SWT.NONE);
-		btnScan.setText("Scan VST folder..");
+		btnScan.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				System.out.println("SCAN VST FILES FOR COMPATIBILITY");
+				
+			}
+		});
+		btnScan.setText("Scan VST");
 		
 		Button btnCalculate = new Button(composite_2, SWT.NONE);
-		btnCalculate.setText("Calculate VST..");
+		btnCalculate.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				System.out.println("CALCULATE HYPERCUBE PARAMETER REDUCTION FOR VST FILES");
+			}
+		});
+		btnCalculate.setText("Calculate VST");
 		
-		Composite composite_1 = new Composite(shlHypercubeVst, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		composite_1.setLayout(new GridLayout(1, false));
+		Composite model_composite = new Composite(shlHypercubeVst, SWT.NONE);
+		model_composite.setLayout(new GridLayout(2, false));
+		model_composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		TextViewer textViewer = new TextViewer(composite_1, SWT.BORDER);
+		Label lblNewLabel = new Label(model_composite, SWT.NONE);
+		lblNewLabel.setText("Model complexity: ");
+		
+		complexitySpinner = new Spinner(model_composite, SWT.BORDER);
+		complexitySpinner.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent arg0) {
+				String valueStr = complexitySpinner.getText();
+				
+				try {
+					int value = Integer.parseInt(valueStr);
+					System.out.println("MODEL COMPLEXITY: " + value);
+				}
+				catch(NumberFormatException nfe) { /* do nothing */ }
+				
+				
+			}
+		});
+		complexitySpinner.setPageIncrement(1);
+		complexitySpinner.setMaximum(10);
+		complexitySpinner.setMinimum(1);
+		
+		
+		Composite text_composite = new Composite(shlHypercubeVst, SWT.NONE);
+		text_composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		text_composite.setLayout(new GridLayout(1, false));
+		
+		TextViewer textViewer = new TextViewer(text_composite, SWT.BORDER);
 		StyledText styledText = textViewer.getTextWidget();
+		styledText.setTouchEnabled(true);
 		styledText.setAlignment(SWT.CENTER);
 		styledText.setEditable(false);
 		styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
