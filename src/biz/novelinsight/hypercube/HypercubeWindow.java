@@ -67,7 +67,8 @@ public class HypercubeWindow {
 	public HypercubeWindow()
 	{
 		model = new HypercubeUIModel();
-		reducer = new DimReducerStub(); // currently just uses stub
+		// reducer = new DimReducerStub(); // currently just uses stub
+		reducer = new HypercubeDimReducer(); // C++ implementation
 		uiThreadRunning = false;
 	}
 
