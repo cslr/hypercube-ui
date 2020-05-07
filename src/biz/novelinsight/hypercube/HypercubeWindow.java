@@ -3,6 +3,7 @@ package biz.novelinsight.hypercube;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
@@ -78,6 +79,10 @@ public class HypercubeWindow {
 	public void open() {
 		display = Display.getDefault();
 		createContents();
+		
+		Image icon = new Image(display, "cube-icon-small.jpg");
+		shlHypercubeVst.setImage(icon);
+		
 		shlHypercubeVst.open();
 		shlHypercubeVst.layout();
 		while (!shlHypercubeVst.isDisposed()) {
@@ -392,15 +397,24 @@ public class HypercubeWindow {
 				    
 		    				if(msgs.length() <= 0) return; // nothing to do
 				    
-		    				if(txt.length() > 0) {
+		    				{
 		    					String newText = txt + msgs;
-		    					messagesText.setText(newText);
-		    				}
-		    				else {
-		    					String newText = msgs;
-		    					messagesText.setText(newText);		    					
-		    				}
-		    				
+		    					
+		    					String[] lines = newText.split("\n");
+		    					
+		    					if(lines.length < 5000) {
+		    						messagesText.setText(newText);
+		    					}
+		    					else {
+		    						// drops more than 5000 lines
+		    						newText = "";
+		    						
+		    						for(int i=lines.length-5000;i<lines.length;i++)
+		    							newText = newText + lines[i];
+		    						
+		    						messagesText.setText(newText);
+		    					}
+		    				}		    				
 		    			}
 		    		});
 			    
