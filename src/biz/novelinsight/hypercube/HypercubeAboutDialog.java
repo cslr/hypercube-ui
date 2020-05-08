@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Link;
 
 public class HypercubeAboutDialog extends Dialog {
@@ -24,7 +25,7 @@ public class HypercubeAboutDialog extends Dialog {
 	 */
 	public HypercubeAboutDialog(Shell parent, int style) {
 		super(parent, style);
-		setText("About Novel Insight Hypercube VST..");
+		setText("About Novel Insight Hypercube VST..");	
 	}
 
 	/**
@@ -33,9 +34,15 @@ public class HypercubeAboutDialog extends Dialog {
 	 */
 	public Object open() {
 		createContents();
+		
 		shlAboutNovelInsight.open();
 		shlAboutNovelInsight.layout();
 		Display display = getParent().getDisplay();
+		
+		Image icon = new Image(display, "cube-icon-small.jpg");
+		if(shlAboutNovelInsight != null)
+			shlAboutNovelInsight.setImage(icon);
+		
 		while (!shlAboutNovelInsight.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();

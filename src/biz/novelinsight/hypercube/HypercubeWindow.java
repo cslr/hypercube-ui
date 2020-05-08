@@ -97,7 +97,7 @@ public class HypercubeWindow {
 	 */
 	protected void createContents() {
 		shlHypercubeVst = new Shell();
-		shlHypercubeVst.setSize(571, 413);
+		shlHypercubeVst.setSize(689, 674);
 		shlHypercubeVst.setText("Hypercube VST");
 		shlHypercubeVst.setLayout(new GridLayout(1, false));
 		
