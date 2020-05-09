@@ -17,6 +17,8 @@ public class HypercubeAboutDialog extends Dialog {
 
 	protected Object result;
 	protected Shell shlAboutNovelInsight;
+	
+	static final protected String hypercubeVersion = "v0.80";
 
 	/**
 	 * Create the dialog.
@@ -62,7 +64,7 @@ public class HypercubeAboutDialog extends Dialog {
 		
 		Label lblNewLabel = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblNewLabel.setAlignment(SWT.CENTER);
-		lblNewLabel.setText("Hypercube VST parameter reducer is developed\n by Novel Insight / Tomas Ukkonen.");
+		lblNewLabel.setText("Hypercube VST " + this.hypercubeVersion + " is developed\n by Novel Insight / Tomas Ukkonen (© Copyright 2020).");
 		
 		Label lblTheUserMust = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblTheUserMust.setAlignment(SWT.CENTER);

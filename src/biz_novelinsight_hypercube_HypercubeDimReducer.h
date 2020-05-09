@@ -25,6 +25,22 @@ JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_s
 
 /*
  * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
+ * Method:    isScanningComputing
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_isScanningComputing
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
+ * Method:    stopScanning
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_stopScanning
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
  * Method:    startCalculateVSTParameterReduction
  * Signature: (Ljava/lang/String;FZZ)Z
  */

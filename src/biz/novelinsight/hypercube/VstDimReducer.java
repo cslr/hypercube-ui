@@ -13,7 +13,16 @@ public interface VstDimReducer {
 
 	// scan VST file status. If file is compatible and parameter reduction can be computed returns true
 	// after this call get unread messages from getUnreadMessages()
+	// starts internal thread for scanning which reports what it finds through getUnreadMessages()
 	public boolean scanVSTFile(String vstFile);
+	
+	// returns true if internal thread for scanning is running
+	public boolean isScanningComputing();
+
+	// stops internal scanning thread, returns false if scanning is not running
+	public boolean stopScanning();
+
+	
 	
 	// starts C++ thread for calculating parameter reduction: call getUnreadMessages() to get status of computation
 	public boolean startCalculateVSTParameterReduction(String vstFile, float quality, boolean useVAE, boolean skipExisting);

@@ -53,6 +53,19 @@ public class DimReducerStub implements VstDimReducer {
 			return false;
 	}
 	
+	// returns true if internal thread for scanning is running
+	public boolean isScanningComputing()
+	{
+		return false; // do not start internal thread that could be stopped
+	}
+
+	// stops internal scanning thread, returns false if scanning is not running
+	public boolean stopScanning()
+	{
+		return true; // always succeeds stopping non-existing thread
+	}
+
+	
 	// starts C++ thread for calculating parameter reduction: call getUnreadMessages() to get status of computation
 	public boolean startCalculateVSTParameterReduction(String vstFile, float quality, boolean useVAE, boolean skipExisting)
 	{

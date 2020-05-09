@@ -10,12 +10,20 @@ public class HypercubeDimReducer implements VstDimReducer {
 	// User Interface thread will call this every 500ms to update messages GUI.
 	native public String getUnreadMessages();
 	
-	// NOTE: vstFile parameter can contain wildcards to process one by one all possible vstFiles.
-
+	// NOTE: vstFile may be directory to process all files within directory
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// scan VST file status. If file is compatible and parameter reduction can be computed returns true
 	// after this call get unread messages from getUnreadMessages()
 	native public boolean scanVSTFile(String vstFile);
 	
+	// returns true if internal thread for scanning is running
+	native public boolean isScanningComputing();
+
+	// stops internal scanning thread, returns false if scanning is not running
+	native public boolean stopScanning();
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// starts C++ thread for calculating parameter reduction: call getUnreadMessages() to get status of computation
 	native public boolean 
 		startCalculateVSTParameterReduction(String vstFile, float quality, boolean useVAE, boolean skipExisting);
@@ -25,7 +33,9 @@ public class HypercubeDimReducer implements VstDimReducer {
 	
 	// stops computation: updates getUnreadMessages()
 	native public boolean stopCalculateVSTParameterReduction();
+
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// remove generated vst files
 	native public boolean removeVSTParameterReductionFiles(String vstFile);
 

@@ -314,10 +314,13 @@ public class HypercubeWindow {
 		stopComputationButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if(reducer.isParameterReductionComputing()) {
-					System.out.println("Stoping computation: " + reducer.stopCalculateVSTParameterReduction());
+				if(reducer.isScanningComputing()) {
+					System.out.println("Stoping scanning: " + reducer.stopScanning());
 				}
-					
+				
+				if(reducer.isParameterReductionComputing()) {
+					System.out.println("Stoping parameter reduction computation: " + reducer.stopCalculateVSTParameterReduction());
+				}	
 			}
 		});
 		stopComputationButton.setText("Stop");
@@ -387,9 +390,12 @@ public class HypercubeWindow {
 		    					return;
 		    				
 		    				// updates buttons 
-		    				scanButton.setEnabled(reducer.isParameterReductionComputing() == false);
-		    				calculateButton.setEnabled(reducer.isParameterReductionComputing() == false);
-		    				stopComputationButton.setEnabled(reducer.isParameterReductionComputing());
+		    				boolean computing = reducer.isParameterReductionComputing() == true || 
+		    						reducer.isScanningComputing() == true;
+		    				
+		    				scanButton.setEnabled(computing == false);
+		    				calculateButton.setEnabled(computing == false);
+		    				stopComputationButton.setEnabled(computing == true);
 
 		    				// updates message area
 		    				String txt  = messagesText.getText();
