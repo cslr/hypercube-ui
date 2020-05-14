@@ -17,15 +17,17 @@ public class HypercubeAboutDialog extends Dialog {
 	protected Object result;
 	protected Shell shlAboutNovelInsight;
 	
-	final protected String hypercubeVersion = "v0.80";
-
+	protected HypercubeUIModel model;
+	
 	/**
 	 * Create the dialog.
 	 * @param parent
 	 * @param style
 	 */
-	public HypercubeAboutDialog(Shell parent, int style) {
+	public HypercubeAboutDialog(Shell parent, HypercubeUIModel model, int style) {
 		super(parent, style);
+		this.model = model;
+		
 		setText("About Novel Insight Hypercube VST..");	
 	}
 
@@ -63,7 +65,7 @@ public class HypercubeAboutDialog extends Dialog {
 		
 		Label lblNewLabel = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblNewLabel.setAlignment(SWT.CENTER);
-		lblNewLabel.setText("Hypercube VST " + this.hypercubeVersion + " is developed\n by Novel Insight / Tomas Ukkonen (© Copyright 2020).");
+		lblNewLabel.setText(model.getAppName() + " " + model.getAppVersion() + " is developed\n by Novel Insight / Tomas Ukkonen (© Copyright 2020).");
 		
 		Label lblTheUserMust = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblTheUserMust.setAlignment(SWT.CENTER);

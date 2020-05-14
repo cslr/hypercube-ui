@@ -3,9 +3,16 @@ package biz.novelinsight.hypercube;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.swt.widgets.Display;
+
 
 // stores state of the Hypercube UI data model
 public class HypercubeUIModel {
+	
+	// software information
+	
+	final protected String appName = "Hypercube VST";
+	final protected String appVersion = "v0.80";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 
@@ -33,6 +40,16 @@ public class HypercubeUIModel {
 		this.modelComplexity = model.modelComplexity;
 		this.skipExistingModels = model.skipExistingModels;
 	}
+	
+	public String getAppName() {
+		return this.appName;
+	}
+	
+	
+	public String getAppVersion() {
+		return this.appVersion;
+	}
+
 	
 	public File getVSTFile() {
 		return vstFile; // can be NULL

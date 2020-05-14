@@ -59,6 +59,10 @@ public class HypercubeWindow {
 	public static void main(String[] args) {
 		try {
 			HypercubeWindow window = new HypercubeWindow();
+			
+			Display.setAppName(window.model.getAppName());
+			Display.setAppVersion(window.model.getAppVersion());
+			
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -231,7 +235,7 @@ public class HypercubeWindow {
 			public void widgetSelected(SelectionEvent e) {
 				System.out.println("ABOUT DIALOG SELECTED");
 				
-				HypercubeAboutDialog dialog = new HypercubeAboutDialog(shlHypercubeVst, SWT.NONE);
+				HypercubeAboutDialog dialog = new HypercubeAboutDialog(shlHypercubeVst, model, SWT.NONE);
 				dialog.open();
 			}
 		});
