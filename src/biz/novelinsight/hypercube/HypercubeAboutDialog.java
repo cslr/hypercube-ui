@@ -5,7 +5,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -18,7 +17,7 @@ public class HypercubeAboutDialog extends Dialog {
 	protected Object result;
 	protected Shell shlAboutNovelInsight;
 	
-	static final protected String hypercubeVersion = "v0.80";
+	final protected String hypercubeVersion = "v0.80";
 
 	/**
 	 * Create the dialog.
@@ -72,11 +71,11 @@ public class HypercubeAboutDialog extends Dialog {
 		
 		Label lblHttpswwwnovelinsightbiz = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblHttpswwwnovelinsightbiz.setAlignment(SWT.CENTER);
-		lblHttpswwwnovelinsightbiz.setText("https://www.novelinsight.biz/");
+		lblHttpswwwnovelinsightbiz.setText("https://www.novelinsight.fi/");
 		
 		Label lblBusinessnovelinsightbiz = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblBusinessnovelinsightbiz.setAlignment(SWT.CENTER);
-		lblBusinessnovelinsightbiz.setText("business@novelinsight.biz");
+		lblBusinessnovelinsightbiz.setText("business@novelinsight.fi");
 		
 		Button btnOk = new Button(shlAboutNovelInsight, SWT.NONE);
 		btnOk.addSelectionListener(new SelectionAdapter() {

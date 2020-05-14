@@ -13,7 +13,7 @@ public class HypercubeUIModel {
 	// do we use computational expensive methods (Variational Autoencoder)
 	private boolean useVAE;
 	
-	// model complexity is value between ]1,10.0]
+	// model complexity is value between ]1,20.0]
 	private float modelComplexity;
 	
 	// true if we skip computing already existing models
@@ -81,7 +81,7 @@ public class HypercubeUIModel {
 	
 	public boolean setModelComplexity(float c) {
 		if(c < 1.0f) return false;
-		if(c > 10.0f) return false;
+		if(c > 20.0f) return false;
 		
 		modelComplexity = c;
 		return true;

@@ -130,6 +130,7 @@ public class HypercubeWindow {
 			}
 		});
 		mntmNewItem.setText("Select VST folder..");
+		mntmNewItem.setToolTipText("Selects a VST folder. Calculates VST parameter reduction for VST files in the selected folder.");
 		
 		MenuItem mntmSelectOneVst = new MenuItem(menu_1, SWT.NONE);
 		mntmSelectOneVst.addSelectionListener(new SelectionAdapter() {
@@ -153,6 +154,7 @@ public class HypercubeWindow {
 			}
 		});
 		mntmSelectOneVst.setText("Select one VST effect..");
+		mntmSelectOneVst.setToolTipText("Selects a single VST file for which to compute parameter reduction.");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
@@ -170,6 +172,7 @@ public class HypercubeWindow {
 			}
 		});
 		mntmSkipAlreadyExisting.setText("Skip already existing VSTs");
+		mntmSkipAlreadyExisting.setToolTipText("Set skip already computed Hypercube VST files.");
 		
 		mntmVaeModeslow = new MenuItem(menu_1, SWT.CHECK);
 		mntmVaeModeslow.setSelection(model.getUseVAE());
@@ -183,7 +186,8 @@ public class HypercubeWindow {
 				System.out.println("VAE SELECTED: " + model.getUseVAE());
 			}
 		});
-		mntmVaeModeslow.setText("VAE mode (slow)");
+		mntmVaeModeslow.setText("Deep mode (slow)");
+		mntmVaeModeslow.setToolTipText("Enables use of deep learning algorithms.");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
@@ -199,6 +203,7 @@ public class HypercubeWindow {
 			}
 		});
 		mntmQuit.setText("Quit");
+		mntmQuit.setToolTipText("Shutdowns the program.");
 		
 		MenuItem mntmHelp = new MenuItem(menu, SWT.CASCADE);
 		mntmHelp.setText("Help");
@@ -211,9 +216,12 @@ public class HypercubeWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				System.out.println("SHOW HTML HELP DOCUMENT");
+				String path = System.getProperty("user.dir");
+				org.eclipse.swt.program.Program.launch(path + "/help/index.html");
 			}
 		});
 		mntmHelpContents.setText("Help contents");
+		mntmHelpContents.setToolTipText("How to use Hypercube VST software.");
 		
 		new MenuItem(menu_2, SWT.SEPARATOR);
 		
@@ -228,6 +236,7 @@ public class HypercubeWindow {
 			}
 		});
 		mntmNewItem_1.setText("About Hypercube VST");
+		mntmNewItem_1.setToolTipText("Hypercube VST software information.");
 		
 		Composite file_composite = new Composite(shlHypercubeVst, SWT.NONE);
 		file_composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -254,6 +263,7 @@ public class HypercubeWindow {
 		}	
 		
 		filenameText.setEditable(false);
+		filenameText.setToolTipText("A VST file or directory to process.");
 		
 		Composite composite_2 = new Composite(file_composite, SWT.NONE);
 		composite_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -277,6 +287,7 @@ public class HypercubeWindow {
 			}
 		});
 		scanButton.setText("Scan VST");
+		scanButton.setToolTipText("Checks if parameter reduction can be computed for a VST file(s).");
 		
 		calculateButton = new Button(composite_2, SWT.NONE);
 		calculateButton.addSelectionListener(new SelectionAdapter() {
@@ -309,6 +320,7 @@ public class HypercubeWindow {
 			}
 		});
 		calculateButton.setText("Calculate VST");
+		calculateButton.setToolTipText("Computes parameter reduction.");
 		
 		stopComputationButton = new Button(composite_2, SWT.NONE);
 		stopComputationButton.addSelectionListener(new SelectionAdapter() {
@@ -324,6 +336,7 @@ public class HypercubeWindow {
 			}
 		});
 		stopComputationButton.setText("Stop");
+		stopComputationButton.setToolTipText("Stops computation.");
 		
 		Composite model_composite = new Composite(shlHypercubeVst, SWT.NONE);
 		model_composite.setLayout(new GridLayout(2, false));
@@ -350,8 +363,10 @@ public class HypercubeWindow {
 			}
 		});
 		complexitySpinner.setPageIncrement(1);
-		complexitySpinner.setMaximum(10);
+		complexitySpinner.setMaximum(20);
 		complexitySpinner.setMinimum(1);
+		complexitySpinner.setToolTipText("Sets model size.");
+		complexitySpinner.setSelection((int)model.getModelComplexity());
 		
 		
 		Composite text_composite = new Composite(shlHypercubeVst, SWT.NONE);
@@ -396,6 +411,13 @@ public class HypercubeWindow {
 		    				scanButton.setEnabled(computing == false);
 		    				calculateButton.setEnabled(computing == false);
 		    				stopComputationButton.setEnabled(computing == true);
+		    				complexitySpinner.setEnabled(computing == false);
+		    				
+		    				mntmNewItem.setEnabled(computing == false);
+		    				mntmSelectOneVst.setEnabled(computing == false);
+		    				mntmSkipAlreadyExisting.setEnabled(computing == false);
+		    				mntmVaeModeslow.setEnabled(computing == false);
+		    				
 
 		    				// updates message area
 		    				String txt  = messagesText.getText();
