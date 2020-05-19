@@ -12,7 +12,7 @@ public class HypercubeUIModel {
 	// software information
 	
 	final protected String appName = "Hypercube VST";
-	final protected String appVersion = "v0.80";
+	final protected String appVersion = "v0.89";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 
@@ -20,8 +20,11 @@ public class HypercubeUIModel {
 	// do we use computational expensive methods (Variational Autoencoder)
 	private boolean useVAE;
 	
-	// model complexity is value between ]1,20.0]
+	// model complexity is value between ]1,100.0]
 	private float modelComplexity;
+	
+	final protected float modelComplexityMinimum = 1.0f;
+	final protected float modelComplexityMaximum = 40.0f;
 	
 	// true if we skip computing already existing models
 	private boolean skipExistingModels;
@@ -92,15 +95,27 @@ public class HypercubeUIModel {
 		this.useVAE = useVAE;
 	}
 	
+	public float getModelComplexityMaximum() {
+		return this.modelComplexityMaximum;
+	}
+	
+	public float getModelComplexityMinimum() {
+		return this.modelComplexityMinimum;
+	}
+	
 	public float getModelComplexity(){
 		return this.modelComplexity;
 	}
 	
 	public boolean setModelComplexity(float c) {
-		if(c < 1.0f) return false;
-		if(c > 20.0f) return false;
+		if(c < this.modelComplexityMinimum)
+			c = this.modelComplexityMinimum;
+		
+		if(c > this.modelComplexityMaximum)
+			c = this.modelComplexityMaximum;
 		
 		modelComplexity = c;
+		
 		return true;
 	}
 	

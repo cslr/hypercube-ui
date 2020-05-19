@@ -10,7 +10,8 @@ public class HypercubeDimReducer implements VstDimReducer {
 	// User Interface thread will call this every 500ms to update messages GUI.
 	native public String getUnreadMessages();
 	
-	// NOTE: vstFile may be directory to process all files within directory
+	// checks if we have write access to vst directory or file's directory (vstFile may be directory or filename)
+	native public boolean hasWriteAccess(String vstFile);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// scan VST file status. If file is compatible and parameter reduction can be computed returns true

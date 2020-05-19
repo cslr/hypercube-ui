@@ -31,12 +31,37 @@ public class DimReducerStub implements VstDimReducer {
 		return msg;
 	}
 	
-	// NOTE: vstFile parameter can contain wildcards to process one by one all possible vstFiles.
+	// checks if we have write access to vst directory or file's directory (vstFile may be directory or filename)
+	public boolean hasWriteAccess(String vstFile)
+	{
+		if(vstFile == null) return false;
+		File f = new File(vstFile);
+		
+		if(f.isDirectory()) {
+			if(f.canWrite()) return true;
+			else return false;
+		}
+		else {
+			String dirname = f.getParent();
+			if(dirname == null) return false;
+			
+			File d = new File(dirname);
+			
+			if(d.isDirectory()) {
+				if(d.canWrite()) return true;
+				else return false;
+			}
+			else return false;
+		}
+	}
+	
 
 	// scan VST file status. If file is compatible and parameter reduction can be computed returns true
 	// after this call get unread messages from getUnreadMessages()
 	public boolean scanVSTFile(String vstFile)
 	{
+		if(vstFile == null) return false;
+		
 		File f = new File(vstFile);
 		
 		if(f.exists()) {

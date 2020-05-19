@@ -1,8 +1,9 @@
 # define installer name
 Name "Novel Insight Hypercube VST"
-OutFile "Setup Novel Insight Hypercube VST.exe"
+OutFile "Novel Insight Hypercube VST Setup.exe"
 
 Unicode True
+RequestExecutionLevel highest
 
 # set desktop as install directory
 InstallDir "$PROGRAMFILES64\Novel Insight Hypercube VST"
@@ -47,7 +48,7 @@ WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Novel Insi
 
 
 # set PATH
-# EnVar::SetHKLM ; if SetHKLM is set attempt to modify PATH just hangs..
+## EnVar::SetHKLM ; if SetHKLM is set attempt to modify PATH just hangs..
 DetailPrint "Updating PATH enviroment variable.."
 EnVar::AddValue    "Path" "$INSTDIR"
 

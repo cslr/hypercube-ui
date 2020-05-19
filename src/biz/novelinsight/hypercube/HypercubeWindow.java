@@ -8,6 +8,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.DirectoryDialog;
@@ -129,6 +130,13 @@ public class HypercubeWindow {
 			    
 			    System.out.println("MODEL FILE " + filename + " SET: " + filenameUpdated);
 			    
+			    if(reducer.hasWriteAccess(filename) == false) {			    	
+			    	MessageBox dialog2 = new MessageBox(shlHypercubeVst, SWT.ICON_WARNING | SWT.OK);
+			    	dialog2.setText("No Directory Write Access");
+			    	dialog2.setMessage("There is no directory write access which is required to generate files.\nPlease enable write access for VST directory.");
+			    	dialog2.open();
+			    }
+			    
 			    if(filenameUpdated)
 			    	filenameText.setText(model.getFullFilename());
 			}
@@ -150,8 +158,15 @@ public class HypercubeWindow {
 		        
 			    String filename = fd.open();
 			    boolean filenameUpdated = model.setVSTFile(filename);
-			    
+
 			    System.out.println("MODEL FILE " + filename + " SET: " + filenameUpdated);
+
+			    if(reducer.hasWriteAccess(filename) == false) {			    	
+			    	MessageBox dialog2 = new MessageBox(shlHypercubeVst, SWT.ICON_WARNING | SWT.OK);
+			    	dialog2.setText("No Directory Write Access");
+			    	dialog2.setMessage("There is no directory write access which is required to generate files.\nPlease enable write access for VST directory.");
+			    	dialog2.open();
+			    }
 			    
 			    if(filenameUpdated)
 			    	filenameText.setText(model.getFullFilename());
@@ -190,8 +205,8 @@ public class HypercubeWindow {
 				System.out.println("VAE SELECTED: " + model.getUseVAE());
 			}
 		});
-		mntmVaeModeslow.setText("Deep mode (slow)");
-		mntmVaeModeslow.setToolTipText("Enables use of deep learning algorithms.");
+		mntmVaeModeslow.setText("Deep mode (beta)");
+		mntmVaeModeslow.setToolTipText("Enables use of deep learning  (beta/doesn't always give good results).");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
@@ -367,8 +382,8 @@ public class HypercubeWindow {
 			}
 		});
 		complexitySpinner.setPageIncrement(1);
-		complexitySpinner.setMaximum(20);
-		complexitySpinner.setMinimum(1);
+		complexitySpinner.setMaximum((int)model.getModelComplexityMaximum());
+		complexitySpinner.setMinimum((int)model.getModelComplexityMinimum());
 		complexitySpinner.setToolTipText("Sets model size.");
 		complexitySpinner.setSelection((int)model.getModelComplexity());
 		

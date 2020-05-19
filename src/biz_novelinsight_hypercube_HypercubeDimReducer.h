@@ -17,6 +17,14 @@ JNIEXPORT jstring JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_ge
 
 /*
  * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
+ * Method:    hasWriteAccess
+ * Signature: (Ljava/lang/String;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_hasWriteAccess
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
  * Method:    scanVSTFile
  * Signature: (Ljava/lang/String;)Z
  */
