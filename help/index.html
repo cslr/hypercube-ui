@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Novel Insight Hypercube VST</title>
+</head>
+
+<body>
+
+<h1>Novel Insight Hypercube VST</h1>
+<p>
+<img src="cube-icon-regular.jpg" height="250" align="right">
+<b>Novel Insight Hypercube VST</b> is a parameter reducer plugin for VST2 instruments and effects. It reduces 
+the number of synthesizer/effect parameters to just three which makes it easier to find new sounds than changing 
+100+ parameters that may be available through the normal user interface.
+
+<p>
+In order to to do parameter reduction a VST module must have roughly more presets of good instruments/effects than there are 
+synthesizer parameters. The existing good presets are used to find "three dimensional space of good sounds", which can be then explored by using only 
+three parameters: <b>X</b>, <b>Y</b> and <b>Z</b>. Unfortunately, this means that parameter reduction doesn't work for many VST instruments 
+because they don't allow reading and setting synthesizer parameters using VST2 specification functions. Additionally, Hypercube VST currently doesn't 
+support newer VST3 instruments and only supports 64bit VST2 files.
+
+<h3>Calculating parameter reduction</h3>
+<p>
+To calculate parameter reduction you start Hypercube VST program. The program requires Java 64bit installation so please make sure 
+to install 64bit Java (and not Java 32bit) before attempting to start Hypercube VST program. After starting the program select your 
+VST directory from the menu by selecting "<b>File -> Select VST folder..</b>" after this click button "<b>Scan VST</b>" which goes through VST DLL files 
+and reports if it is possible to create parameter reducted VST instrument for that file.
+
+<p>
+<img src="hypercube-vst-parameters.jpg" align="right">
+You can then make sure that "<b>Model complexity</b>" is set to default 1 and click "<b>Calculate VST</b>" button to calculate parameter reduction 
+and create "<b>hypercube-&lt;vstfile&gt;.dll</b>" VST files to the VST folder. The 
+generated Hypercube DLL files can be loaded by DAW host programs like Cubase as proper VST instruments which have only three synthesizer parameters.
+Because calculations can take several hours, you might also want to calculate and create parameter reducer VST DLL for a single VST instrument.
+This can be done by selecting a single file using "<b>File -> Select one VST file..</b>" and by then clicking the "<b>Calculate VST</b>" button. In order 
+to uninstall Hypercube VST files you need to manually remove all files having a word "hypercube" from the VST folder.
+
+<p>
+Once you have computed parameter reduction for your VST files, you might want to try to use <i>advanced</i> settings in order to try to get better results
+and new sounds. Be warned that good results are not always guaranteed (you might need to try to compute parameter reduction multiple times) and 
+computations can take 8-24 hours with only marginally better results.
+
+You can select "<b>Deep mode (beta)</b>" from the File menu which calculates parameter reduction using deep learning algorithms and 
+set model complexity to 10-20 in order to hopefully get good results. The calculations to calculate parameter reduction for a single VST file  
+is SLOW so fast CPU is required. 
+
+<p>
+The more complex model means that the generated VST is slower and for example
+automation of synth parameters don't work because mapping 3 parameters to full synth parameters takes too much time (no realtime performance).
+
+<h3>License</h3>
+<p>
+Hypercube VST is &copy; Copyright 2020 Tomas Ukkonen.
+<p>
+Hypercube software can be used and distributed freely but it's closed source software and reverse engineering it is prohibited.
+<p>
+If you use this software please help me (tomas.ukkonen@iki.fi) to get a job as a Scientist or Data Scientist again (I live in Finland).
+
+
+</body>
+</html>
+
+

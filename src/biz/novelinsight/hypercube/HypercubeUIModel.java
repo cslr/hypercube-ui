@@ -12,7 +12,7 @@ public class HypercubeUIModel {
 	// software information
 	
 	final protected String appName = "Hypercube VST";
-	final protected String appVersion = "v0.89";
+	final protected String appVersion = "v0.93b";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 

@@ -59,17 +59,17 @@ public class HypercubeAboutDialog extends Dialog {
 	 */
 	private void createContents() {
 		shlAboutNovelInsight = new Shell(getParent(), SWT.SHELL_TRIM);
-		shlAboutNovelInsight.setSize(450, 300);
+		shlAboutNovelInsight.setSize(467, 414);
 		shlAboutNovelInsight.setText("About Novel Insight Hypercube VST..");
 		shlAboutNovelInsight.setLayout(new FillLayout(SWT.VERTICAL));
 		
 		Label lblNewLabel = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblNewLabel.setAlignment(SWT.CENTER);
-		lblNewLabel.setText(model.getAppName() + " " + model.getAppVersion() + " is developed\n by Novel Insight / Tomas Ukkonen (© Copyright 2020).");
+		lblNewLabel.setText(model.getAppName() + " " + model.getAppVersion() + " is developed\n by Tomas Ukkonen (© Copyright 2020).");
 		
 		Label lblTheUserMust = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblTheUserMust.setAlignment(SWT.CENTER);
-		lblTheUserMust.setText("Internal use is free but the user must buy a license to distribute audio/music in which this software has been used.");
+		lblTheUserMust.setText("You can use this software freely, but please help me to get a job as Scientist or Data Scientist again. Mental health sector says I'm crazy but it's their medicines that have made me crazy.");
 		
 		Label lblHttpswwwnovelinsightbiz = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblHttpswwwnovelinsightbiz.setAlignment(SWT.CENTER);
@@ -77,7 +77,7 @@ public class HypercubeAboutDialog extends Dialog {
 		
 		Label lblBusinessnovelinsightbiz = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblBusinessnovelinsightbiz.setAlignment(SWT.CENTER);
-		lblBusinessnovelinsightbiz.setText("business@novelinsight.fi");
+		lblBusinessnovelinsightbiz.setText("tomas.ukkonen@iki.fi");
 		
 		Button btnOk = new Button(shlAboutNovelInsight, SWT.NONE);
 		btnOk.addSelectionListener(new SelectionAdapter() {
