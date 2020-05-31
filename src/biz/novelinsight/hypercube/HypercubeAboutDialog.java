@@ -69,7 +69,7 @@ public class HypercubeAboutDialog extends Dialog {
 		
 		Label lblTheUserMust = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblTheUserMust.setAlignment(SWT.CENTER);
-		lblTheUserMust.setText("You can use this software freely, but please help me to get a job as Scientist or Data Scientist again. Mental health sector says I'm crazy but it's their medicines that have made me crazy.");
+		lblTheUserMust.setText("You can use this software freely, but please help me to get a job as Scientist or Data Scientist again. Mental health sector says I'm (a bit) crazy but it's their medicines that have made me crazy.");
 		
 		Label lblHttpswwwnovelinsightbiz = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblHttpswwwnovelinsightbiz.setAlignment(SWT.CENTER);
