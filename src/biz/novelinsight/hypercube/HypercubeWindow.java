@@ -130,7 +130,7 @@ public class HypercubeWindow {
 			    
 			    System.out.println("MODEL FILE " + filename + " SET: " + filenameUpdated);
 			    
-			    if(reducer.hasWriteAccess(filename) == false) {			    	
+			    if(reducer.hasWriteAccess(filename) == false && filename != null) {			    	
 			    	MessageBox dialog2 = new MessageBox(shlHypercubeVst, SWT.ICON_WARNING | SWT.OK);
 			    	dialog2.setText("No Directory Write Access");
 			    	dialog2.setMessage("There is no directory write access which is required to generate files.\nPlease enable write access for VST directory.");
@@ -161,7 +161,7 @@ public class HypercubeWindow {
 
 			    System.out.println("MODEL FILE " + filename + " SET: " + filenameUpdated);
 
-			    if(reducer.hasWriteAccess(filename) == false) {			    	
+			    if(reducer.hasWriteAccess(filename) == false && filename != null) {	    	
 			    	MessageBox dialog2 = new MessageBox(shlHypercubeVst, SWT.ICON_WARNING | SWT.OK);
 			    	dialog2.setText("No Directory Write Access");
 			    	dialog2.setMessage("There is no directory write access which is required to generate files.\nPlease enable write access for VST directory.");
@@ -293,7 +293,7 @@ public class HypercubeWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				System.out.println("SCAN VST FILES FOR COMPATIBILITY");
+				System.out.println("SCAN VST FILES FOR COMPATIBILITY: " + model.getFullFilename());
 				
 				String filename = model.getFullFilename();
 					
@@ -364,7 +364,12 @@ public class HypercubeWindow {
 		Label lblNewLabel = new Label(model_composite, SWT.NONE);
 		lblNewLabel.setText("Model complexity: ");
 		
+		
 		complexitySpinner = new Spinner(model_composite, SWT.BORDER);
+		
+		model.setModelComplexity(10.0f);
+		complexitySpinner.setSelection((int)model.getModelComplexity());
+		
 		complexitySpinner.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
 				String valueStr = complexitySpinner.getText();
@@ -385,7 +390,6 @@ public class HypercubeWindow {
 		complexitySpinner.setMaximum((int)model.getModelComplexityMaximum());
 		complexitySpinner.setMinimum((int)model.getModelComplexityMinimum());
 		complexitySpinner.setToolTipText("Sets model size.");
-		complexitySpinner.setSelection((int)model.getModelComplexity());
 		
 		
 		Composite text_composite = new Composite(shlHypercubeVst, SWT.NONE);

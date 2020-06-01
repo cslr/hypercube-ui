@@ -48,6 +48,20 @@ is SLOW so fast CPU is required.
 The more complex model means that the generated VST is slower and for example
 automation of synth parameters don't work because mapping 3 parameters to full synth parameters takes too much time (no realtime performance).
 
+<h3>KNOWN BUGS</h3>
+<p>
+Hypercube VST modifies PATH environment variable to point to "C:\Program Files\Novel Insight Hypercube VST" which contains DLL files 
+used by hypercube wrapper plugins. However, if there are earlier reference in PATH to same DLLs, earlier version DLLs 
+(especially libstdc++-6.dll file) are used which don't work and plugin cannot be loaded. 
+The fix is to remove earlier reference to same DLLs in PATH (This can happen, for example, if you have installed a compiler that distributes
+same DLL files).
+<p>
+Bad results. You can try to increase complexity to 10 or more or simple try to recalculate parameter reduction again to get slightly 
+different results.
+<p>
+The unicode support for filenames may break sometimes as it is not fully tested. The fix is to rename all paths and filenames to have only ASCII
+characters (mostly A-Z, 0-9).
+
 <h3>License</h3>
 <p>
 Hypercube VST is &copy; Copyright 2020 Tomas Ukkonen.
