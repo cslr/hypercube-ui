@@ -367,7 +367,6 @@ public class HypercubeWindow {
 		
 		complexitySpinner = new Spinner(model_composite, SWT.BORDER);
 		
-		model.setModelComplexity(10.0f);
 		complexitySpinner.setSelection((int)model.getModelComplexity());
 		
 		complexitySpinner.addModifyListener(new ModifyListener() {
