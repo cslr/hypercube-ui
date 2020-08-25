@@ -12,7 +12,7 @@ public class HypercubeUIModel {
 	// software information
 	
 	final protected String appName = "Hypercube VST";
-	final protected String appVersion = "v0.96b";
+	final protected String appVersion = "v0.97b";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 
@@ -24,7 +24,7 @@ public class HypercubeUIModel {
 	private float modelComplexity = 1.0f;
 	
 	final protected float modelComplexityMinimum = 1.0f;
-	final protected float modelComplexityMaximum = 40.0f;
+	final protected float modelComplexityMaximum = 10.0f;
 	
 	// true if we skip computing already existing models
 	private boolean skipExistingModels;

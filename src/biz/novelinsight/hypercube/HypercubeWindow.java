@@ -205,8 +205,8 @@ public class HypercubeWindow {
 				System.out.println("VAE SELECTED: " + model.getUseVAE());
 			}
 		});
-		mntmVaeModeslow.setText("Deep mode (beta)");
-		mntmVaeModeslow.setToolTipText("Enables use of deep learning  (beta/doesn't always give good results).");
+		mntmVaeModeslow.setText("VAE mode (beta)");
+		mntmVaeModeslow.setToolTipText("Enables use of VAE mode  (beta/doesn't always give good results).");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
