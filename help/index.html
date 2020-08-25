@@ -47,13 +47,14 @@ Once you have computed parameter reduction for your VST files, you might want to
 and new sounds. Be warned that good results are not always guaranteed (you might need to try to compute parameter reduction multiple times) and 
 computations can take 8-24 hours with only marginally better results.
 
-You can select "<b>Deep mode (beta)</b>" from the File menu which calculates parameter reduction using deep learning algorithms and 
-set model complexity to high 10-20 in order to hopefully get good results. The calculations to calculate parameter reduction for a single VST file  
+You can select "<b>VAE mode (beta)</b>" from the File menu which calculates parameter reduction using deep learning algorithms and 
+increase model complexity to higher values to hopefully get good results. The calculations to calculate parameter reduction even for a single VST file  
 is SLOW so fast CPU is required. 
 
 <p>
 The more complex model means that the generated VST is slower and for example
-automation of synth parameters don't work because mapping 3 parameters to full synth parameters takes too much time (no realtime performance).
+automation of synth parameters don't work because mapping 3 parameters to full synth parameters takes too much time (no realtime performance changing 
+synth parameters).
 
 <h3>KNOWN BUGS</h3>
 <p>
@@ -63,7 +64,7 @@ used by hypercube wrapper plugins. However, if there are earlier reference in PA
 The fix is to remove earlier reference to same DLLs in PATH (This can happen, for example, if you have installed a compiler that distributes
 same DLL files).
 <p>
-Bad results. You can try to increase complexity to 10 (20+ in deep mode) or simple try to recalculate parameter reduction again to get slightly 
+Bad results. You can try to increase complexity or simple try to recalculate parameter reduction again to get slightly 
 different results.
 <p>
 The unicode support for filenames may break sometimes as it is not fully tested. The fix is to rename all paths and filenames to have only ASCII
