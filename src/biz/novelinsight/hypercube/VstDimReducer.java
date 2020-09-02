@@ -23,10 +23,13 @@ public interface VstDimReducer {
 	// stops internal scanning thread, returns false if scanning is not running
 	public boolean stopScanning();
 
-	
+	// learning method for startCalculateVSTParameterReduction()
+	static final int USE_PCA = 0;
+	static final int USE_TSNE = 1;
+	static final int USE_VAE = 2;
 	
 	// starts C++ thread for calculating parameter reduction: call getUnreadMessages() to get status of computation
-	public boolean startCalculateVSTParameterReduction(String vstFile, float quality, boolean useVAE, boolean skipExisting);
+	public boolean startCalculateVSTParameterReduction(String vstFile, float quality, int method, boolean skipExisting);
 	
 	// returns true if parameter reducer is still computing
 	public boolean isParameterReductionComputing();
@@ -34,9 +37,13 @@ public interface VstDimReducer {
 	// stops computation: updates getUnreadMessages()
 	public boolean stopCalculateVSTParameterReduction();
 	
-	// remove generated vst files
+	// starts removal of generated vst files
 	public boolean removeVSTParameterReductionFiles(String vstFile);
 	
+	// returns true if is removing parameter reduction VST and data files
+	public boolean isRemoveComputing();
 	
+	// stops removal process
+	public boolean stopRemoveComputing();
 	
 }

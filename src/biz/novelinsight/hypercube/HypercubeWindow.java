@@ -37,7 +37,7 @@ public class HypercubeWindow {
 	protected Shell shlHypercubeVst;
 	protected Display display;
 	
-	private MenuItem mntmVaeModeslow;
+	// private MenuItem mntmVaeModeslow;
 	private MenuItem mntmSkipAlreadyExisting;
 	private Spinner complexitySpinner;
 	private Text filenameText;
@@ -45,6 +45,7 @@ public class HypercubeWindow {
 	
 	private Button scanButton;
 	private Button calculateButton;
+	private Button removeButton;
 	private Button stopComputationButton;
 	
 	private Thread uiUpdateThread; // thread to keep UI updated from reducer computations
@@ -193,6 +194,8 @@ public class HypercubeWindow {
 		mntmSkipAlreadyExisting.setText("Skip already existing VSTs");
 		mntmSkipAlreadyExisting.setToolTipText("Set skip already computed Hypercube VST files.");
 		
+		model.setMethod(VstDimReducer.USE_TSNE); // always uses t-SNE for now
+		/*
 		mntmVaeModeslow = new MenuItem(menu_1, SWT.CHECK);
 		mntmVaeModeslow.setSelection(model.getUseVAE());
 		mntmVaeModeslow.addSelectionListener(new SelectionAdapter() {
@@ -207,6 +210,7 @@ public class HypercubeWindow {
 		});
 		mntmVaeModeslow.setText("VAE mode (beta)");
 		mntmVaeModeslow.setToolTipText("Enables use of VAE mode  (beta/doesn't always give good results).");
+		*/
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
@@ -296,8 +300,12 @@ public class HypercubeWindow {
 				System.out.println("SCAN VST FILES FOR COMPATIBILITY: " + model.getFullFilename());
 				
 				String filename = model.getFullFilename();
-					
-				if(filename.compareTo("") == 0) {
+				
+				if(filename == null) {
+					System.out.println("Starting scan failed. NO FILENAME.");
+					return;
+				}
+				else if(filename.compareTo("") == 0) {
 					System.out.println("Starting scan failed. NO FILENAME.");
 					return;
 				}
@@ -333,13 +341,42 @@ public class HypercubeWindow {
 					
 				System.out.println("Start computation returned: " + 
 					reducer.startCalculateVSTParameterReduction
-					(filename, model.getModelComplexity(), model.getUseVAE(), model.getSkipExistingModels()));
+					(filename, model.getModelComplexity(), model.getMethod(), model.getSkipExistingModels()));
 
 				
 			}
 		});
 		calculateButton.setText("Calculate VST");
 		calculateButton.setToolTipText("Computes parameter reduction.");
+		
+		removeButton = new Button(composite_2, SWT.NONE);
+		removeButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.out.println("REMOVE VST BUTTON PRESSED: " + model.getFullFilename());
+				
+				String filename = model.getFullFilename();
+				
+				if(filename == null) {
+					System.out.println("Starting remove failed. NO FILENAME.");
+					return;
+				}
+				else if(filename.compareTo("") == 0) {
+					System.out.println("Starting remove failed. NO FILENAME.");
+					return;
+				}
+				
+				if(reducer.isRemoveComputing()) {
+					System.out.println("Already performing removal.");
+					return;
+				}
+				
+				System.out.println("Remove started: " + reducer.removeVSTParameterReductionFiles(filename));
+				
+			}
+		});
+		removeButton.setText("Remove VST");
+		removeButton.setToolTipText("Removes generated Hypercube VST files.");
 		
 		stopComputationButton = new Button(composite_2, SWT.NONE);
 		stopComputationButton.addSelectionListener(new SelectionAdapter() {
@@ -351,7 +388,11 @@ public class HypercubeWindow {
 				
 				if(reducer.isParameterReductionComputing()) {
 					System.out.println("Stoping parameter reduction computation: " + reducer.stopCalculateVSTParameterReduction());
-				}	
+				}
+				
+				if(reducer.isRemoveComputing()) {
+					System.out.println("Stopping file removal process: " + reducer.stopRemoveComputing());
+				}
 			}
 		});
 		stopComputationButton.setText("Stop");
@@ -428,17 +469,19 @@ public class HypercubeWindow {
 		    				
 		    				// updates buttons 
 		    				boolean computing = reducer.isParameterReductionComputing() == true || 
-		    						reducer.isScanningComputing() == true;
+		    						reducer.isScanningComputing() == true || 
+		    						reducer.isRemoveComputing() == true;
 		    				
 		    				scanButton.setEnabled(computing == false);
 		    				calculateButton.setEnabled(computing == false);
+		    				removeButton.setEnabled(computing == false);
 		    				stopComputationButton.setEnabled(computing == true);
 		    				complexitySpinner.setEnabled(computing == false);
 		    				
 		    				mntmNewItem.setEnabled(computing == false);
 		    				mntmSelectOneVst.setEnabled(computing == false);
 		    				mntmSkipAlreadyExisting.setEnabled(computing == false);
-		    				mntmVaeModeslow.setEnabled(computing == false);
+		    				// mntmVaeModeslow.setEnabled(computing == false);
 		    				
 
 		    				// updates message area

@@ -12,13 +12,13 @@ public class HypercubeUIModel {
 	// software information
 	
 	final protected String appName = "Hypercube VST";
-	final protected String appVersion = "v0.97b";
+	final protected String appVersion = "v0.99b";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 
 	
-	// do we use computational expensive methods (Variational Autoencoder)
-	private boolean useVAE;
+	// dimension reduction method (PCA, t-SNE, Variational Autoencoder)
+	private int method;
 	
 	// model complexity is value between ]1,100.0]
 	private float modelComplexity = 1.0f;
@@ -32,14 +32,14 @@ public class HypercubeUIModel {
 	
 	public HypercubeUIModel(){
 		vstFile = null;
-		useVAE  = false;
+		method = VstDimReducer.USE_PCA;
 		modelComplexity = 1.0f;
 		skipExistingModels = true;
 	}
 	
 	public HypercubeUIModel(HypercubeUIModel model) {
 		this.vstFile = model.vstFile;
-		this.useVAE  = model.useVAE;
+		this.method  = model.method;
 		this.modelComplexity = model.modelComplexity;
 		this.skipExistingModels = model.skipExistingModels;
 	}
@@ -87,12 +87,19 @@ public class HypercubeUIModel {
 
 	}
 	
-	public boolean getUseVAE() {
-		return useVAE;
+	public int getMethod() {
+		return method;
 	}
 	
-	public void setUseVAE(boolean useVAE) {
-		this.useVAE = useVAE;
+	public boolean setMethod(int method) {
+		if(method == VstDimReducer.USE_PCA || 
+			method == VstDimReducer.USE_TSNE || 
+			method == VstDimReducer.USE_VAE) 
+		{
+			this.method = method;
+			return true;
+		}
+		else return false;
 	}
 	
 	public float getModelComplexityMaximum() {

@@ -27,7 +27,7 @@ public class HypercubeDimReducer implements VstDimReducer {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// starts C++ thread for calculating parameter reduction: call getUnreadMessages() to get status of computation
 	native public boolean 
-		startCalculateVSTParameterReduction(String vstFile, float quality, boolean useVAE, boolean skipExisting);
+		startCalculateVSTParameterReduction(String vstFile, float quality, int method, boolean skipExisting);
 	
 	// returns true if parameter reducer is still computing
 	native public boolean isParameterReductionComputing();
@@ -37,7 +37,12 @@ public class HypercubeDimReducer implements VstDimReducer {
 
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	// remove generated vst files
+	// starts removal of generated vst files
 	native public boolean removeVSTParameterReductionFiles(String vstFile);
-
+		
+	// returns true if is removing parameter reduction VST and data files
+	native public boolean isRemoveComputing();
+	
+	// stops removal process
+	native public boolean stopRemoveComputing();
 }

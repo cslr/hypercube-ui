@@ -92,7 +92,7 @@ public class DimReducerStub implements VstDimReducer {
 
 	
 	// starts C++ thread for calculating parameter reduction: call getUnreadMessages() to get status of computation
-	public boolean startCalculateVSTParameterReduction(String vstFile, float quality, boolean useVAE, boolean skipExisting)
+	public boolean startCalculateVSTParameterReduction(String vstFile, float quality, int method, boolean skipExisting)
 	{
 		if(quality <= 0.0f || quality > 10.0f) return false;
 		
@@ -100,6 +100,20 @@ public class DimReducerStub implements VstDimReducer {
 			if(computing.booleanValue() == true)
 				return false; // silently fails if there is already computing going on.
 			
+			if(method == this.USE_PCA) {
+				messages.add("Computing dimension reduction using PCA.");
+			}
+			else if(method == this.USE_TSNE){
+				messages.add("Computing dimension reduction using t-SNE.");
+			}
+			else if(method == this.USE_VAE){
+				messages.add("Computing dimension reduction using VAE.");
+			}
+			else{
+				messages.add("ERROR: Unknown dimension reduction method.");
+				return false;
+			}
+				
 			computing= new Boolean(true);
 		}
 		
@@ -162,7 +176,7 @@ public class DimReducerStub implements VstDimReducer {
 		
 	}
 	
-	// remove generated vst files
+	// starts removal of generated vst files
 	public boolean removeVSTParameterReductionFiles(String vstFile)
 	{
 		File f = new File(vstFile);
@@ -179,7 +193,14 @@ public class DimReducerStub implements VstDimReducer {
 		}
 
 	}
-
-
 	
+	// returns true if is removing parameter reduction VST and data files
+	public boolean isRemoveComputing() {
+		return false; // don't really start removal thread in stub
+	}
+	
+	// stops removal process
+	public boolean stopRemoveComputing() {
+		return true; // always success in stopping removal process
+	}
 }

@@ -50,10 +50,10 @@ JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_s
 /*
  * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
  * Method:    startCalculateVSTParameterReduction
- * Signature: (Ljava/lang/String;FZZ)Z
+ * Signature: (Ljava/lang/String;FIZ)Z
  */
 JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_startCalculateVSTParameterReduction
-  (JNIEnv *, jobject, jstring, jfloat, jboolean, jboolean);
+  (JNIEnv *, jobject, jstring, jfloat, jint, jboolean);
 
 /*
  * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
@@ -78,6 +78,22 @@ JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_s
  */
 JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_removeVSTParameterReductionFiles
   (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
+ * Method:    isRemoveComputing
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_isRemoveComputing
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     biz_novelinsight_hypercube_HypercubeDimReducer
+ * Method:    stopRemoveComputing
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_biz_novelinsight_hypercube_HypercubeDimReducer_stopRemoveComputing
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }
