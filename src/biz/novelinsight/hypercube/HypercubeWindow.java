@@ -178,6 +178,62 @@ public class HypercubeWindow {
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
+		MenuItem mntmPcaMode = new MenuItem(menu_1, SWT.RADIO);
+		mntmPcaMode.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MenuItem item = mntmPcaMode;
+				boolean pcamode = item.getSelection();
+				
+				if(pcamode) {
+					System.out.println("SET PCA MODE");
+					model.setMethod(VstDimReducer.USE_PCA);
+				}
+			}
+		});
+			
+		mntmPcaMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_PCA));
+		mntmPcaMode.setToolTipText("Use ICA for dimension reduction.");
+		mntmPcaMode.setText("ICA mode");
+		
+		MenuItem mntmTsneMode = new MenuItem(menu_1, SWT.RADIO);
+		mntmTsneMode.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MenuItem item = mntmTsneMode;
+				boolean tsnemode = item.getSelection();
+				
+				if(tsnemode) {
+					System.out.println("SET T-SNE MODE");
+					model.setMethod(VstDimReducer.USE_TSNE);
+				}
+			}
+		});
+
+		mntmTsneMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_TSNE));
+		mntmTsneMode.setToolTipText("Use modified t-SNE for dimension reduction.");
+		mntmTsneMode.setText("t-SNE mode");
+		
+		MenuItem mntmVaeMode = new MenuItem(menu_1, SWT.RADIO);
+		mntmTsneMode.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MenuItem item = mntmVaeMode;
+				boolean vaemode = item.getSelection();
+				
+				if(vaemode) {
+					System.out.println("SET VAE MODE");
+					model.setMethod(VstDimReducer.USE_VAE);
+				}
+			}
+		});
+
+		mntmVaeMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_VAE));
+		mntmVaeMode.setToolTipText("Use Variational Autoencoder for dimension reductionv (slow).");
+		mntmVaeMode.setText("VAE mode");
+		
+		MenuItem menuItem = new MenuItem(menu_1, SWT.SEPARATOR);
+		
 		mntmSkipAlreadyExisting = new MenuItem(menu_1, SWT.CHECK);
 		mntmSkipAlreadyExisting.setSelection(model.getSkipExistingModels());
 		mntmSkipAlreadyExisting.addSelectionListener(new SelectionAdapter() {
@@ -194,7 +250,7 @@ public class HypercubeWindow {
 		mntmSkipAlreadyExisting.setText("Skip already existing VSTs");
 		mntmSkipAlreadyExisting.setToolTipText("Set skip already computed Hypercube VST files.");
 		
-		model.setMethod(VstDimReducer.USE_TSNE); // always uses t-SNE for now
+		// model.setMethod(VstDimReducer.USE_TSNE); // always uses t-SNE for now
 		/*
 		mntmVaeModeslow = new MenuItem(menu_1, SWT.CHECK);
 		mntmVaeModeslow.setSelection(model.getUseVAE());

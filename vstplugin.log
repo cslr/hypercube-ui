@@ -1,0 +1,13 @@
+INFO 0.00000 Logging system (re)started..
+INFO 0.02000 Hypercube VST: Loading client VST DLL module successful. ('D:\vstplugins\DJX10.dll')
+
+INFO 0.03300 Hypercube VST: VSTPluginMain symbol loaded
+INFO 0.04400 Hypercube VST: Finding vst main entry point OK. (File: 'D:\vstplugins\DJX10.dll').
+
+INFO 0.05200 Calling child VSTPluginMain
+INFO 0.07300 Checking VST module magic number
+INFO 0.27100 Autoencoder parameter mapping successfully loaded from files (NN: 3->25, DS: 3->25)
+
+INFO 0.28500 restore_parameters() called: 3 3 1ecdf0 1e8170 25
+INFO 0.29500 About to calculate dimension RESTORE
+INFO 0.30600 Shutdown? Logging class destroyed.

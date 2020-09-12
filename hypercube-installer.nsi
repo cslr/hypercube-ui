@@ -27,6 +27,7 @@ File *.jar
 File launch4j.*
 File *.ico
 File cube-icon-small.jpg
+File LICENSES.txt
 File /r help
 
 CreateShortCut "$DESKTOP\NI Hypercube VST.lnk" "$INSTDIR\ni-hypercube.exe"
@@ -71,6 +72,7 @@ Delete $INSTDIR\*.jar
 Delete $INSTDIR\launch4j.*
 Delete $INSTDIR\*.ico
 Delete $INSTDIR\cube-icon-small.jpg
+Delete $INSTDIR\LICENSES.txt
 RMDir /r $INSTDIR\help
 RMDir $INSTDIR
 Delete "$DESKTOP\NI Hypercube VST.lnk"

@@ -1,0 +1,28 @@
+
+Hypercube VST software is copyright Tomas Ukkonen 2020. <tomas.ukkonen@iki.fi>
+It is closed source software.
+
+Software uses following software components:
+
+* Oracle Java (can be freely to used)
+
+* Eclipse WindowBuilder (Eclipse Public License 1.0).
+  Hypercube VST Java code only links to WindowBuilder and 
+  does not modify WindowBuilder.
+
+* GCC/MinGW C & C++ headers and support libraries
+  (MIT/BSD, LGPL and GPL Runtime exception says code will not go under GPL).
+  [libgcc_s_seh-1.dll,libgomp-1.dll,libquadmath-0.dll libstdc++6.dll libwinpthread-1.dll]
+  
+* Dinrhiw2 (self-developed C++ software) 
+  [libdinrhiw.dll]
+  
+* OpenBLAS (BSD license)
+  [libopenblas.dll]
+  
+* GMP (LGPL v3)
+  [libgmp-10.dll]
+  
+* ZLIB (ZLIB license ("BSD"), free to use)
+  [zlib1.dll]7
+

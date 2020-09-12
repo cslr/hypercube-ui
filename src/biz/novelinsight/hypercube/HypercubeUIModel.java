@@ -12,7 +12,7 @@ public class HypercubeUIModel {
 	// software information
 	
 	final protected String appName = "Hypercube VST";
-	final protected String appVersion = "v0.99b";
+	final protected String appVersion = "v0.991 BETA";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 
@@ -20,7 +20,7 @@ public class HypercubeUIModel {
 	// dimension reduction method (PCA, t-SNE, Variational Autoencoder)
 	private int method;
 	
-	// model complexity is value between ]1,100.0]
+	// model complexity is value between ]1,10.0]
 	private float modelComplexity = 1.0f;
 	
 	final protected float modelComplexityMinimum = 1.0f;
