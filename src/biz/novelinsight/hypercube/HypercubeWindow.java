@@ -74,6 +74,7 @@ public class HypercubeWindow {
 	public HypercubeWindow()
 	{
 		model = new HypercubeUIModel();
+		model.setMethod(VstDimReducer.USE_TSNE);
 		// reducer = new DimReducerStub(); // currently just uses stub
 		reducer = new HypercubeDimReducer(); // C++ implementation
 		uiThreadRunning = false;
@@ -193,7 +194,7 @@ public class HypercubeWindow {
 		});
 			
 		mntmPcaMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_PCA));
-		mntmPcaMode.setToolTipText("Use ICA for dimension reduction.");
+		mntmPcaMode.setToolTipText("Use ICA for dimension reduction (linear only).");
 		mntmPcaMode.setText("ICA mode");
 		
 		MenuItem mntmTsneMode = new MenuItem(menu_1, SWT.RADIO);
