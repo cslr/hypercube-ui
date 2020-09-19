@@ -12,7 +12,7 @@ public class HypercubeUIModel {
 	// software information
 	
 	final protected String appName = "Hypercube VST";
-	final protected String appVersion = "v0.991 BETA";
+	final protected String appVersion = "v1.0.9921 BETA";
 	
 	// or directory if all files in directory should be processed
 	private File vstFile; 
@@ -32,7 +32,7 @@ public class HypercubeUIModel {
 	
 	public HypercubeUIModel(){
 		vstFile = null;
-		method = VstDimReducer.USE_PCA;
+		method = VstDimReducer.USE_VAE;
 		modelComplexity = 1.0f;
 		skipExistingModels = true;
 	}

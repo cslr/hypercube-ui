@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.internal.forms.Messages;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.custom.StyledText;
@@ -74,7 +75,6 @@ public class HypercubeWindow {
 	public HypercubeWindow()
 	{
 		model = new HypercubeUIModel();
-		model.setMethod(VstDimReducer.USE_TSNE);
 		// reducer = new DimReducerStub(); // currently just uses stub
 		reducer = new HypercubeDimReducer(); // C++ implementation
 		uiThreadRunning = false;
@@ -194,8 +194,8 @@ public class HypercubeWindow {
 		});
 			
 		mntmPcaMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_PCA));
-		mntmPcaMode.setToolTipText("Use ICA for dimension reduction (linear only).");
-		mntmPcaMode.setText("ICA mode");
+		mntmPcaMode.setToolTipText("Linear model for small number of presets.");
+		mntmPcaMode.setText("Linear mode");
 		
 		MenuItem mntmTsneMode = new MenuItem(menu_1, SWT.RADIO);
 		mntmTsneMode.addSelectionListener(new SelectionAdapter() {
@@ -212,8 +212,8 @@ public class HypercubeWindow {
 		});
 
 		mntmTsneMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_TSNE));
-		mntmTsneMode.setToolTipText("Use modified t-SNE for dimension reduction.");
-		mntmTsneMode.setText("t-SNE mode");
+		mntmTsneMode.setToolTipText("Unreliable results but may lead to finding most innovative new soúnds.");
+		mntmTsneMode.setText("Non-linear mode [unreliable]");
 		
 		MenuItem mntmVaeMode = new MenuItem(menu_1, SWT.RADIO);
 		mntmTsneMode.addSelectionListener(new SelectionAdapter() {
@@ -230,8 +230,8 @@ public class HypercubeWindow {
 		});
 
 		mntmVaeMode.setSelection((boolean)(model.getMethod() == VstDimReducer.USE_VAE));
-		mntmVaeMode.setToolTipText("Use Variational Autoencoder for dimension reductionv (slow).");
-		mntmVaeMode.setText("VAE mode");
+		mntmVaeMode.setToolTipText("Continuous parameter values and gives balanced results [slow].");
+		mntmVaeMode.setText("Deep mode");
 		
 		MenuItem menuItem = new MenuItem(menu_1, SWT.SEPARATOR);
 		
@@ -553,13 +553,14 @@ public class HypercubeWindow {
 		    					String[] lines = newText.split("\n");
 		    					
 		    					if(lines.length < 5000) {
-		    						messagesText.setText(newText);
+		    						messagesText.append(msgs); // faster updating all the lines
+		    						//messagesText.setText(newText);
 		    					}
 		    					else {
-		    						// drops more than 5000 lines
+		    						// drops more than 5000 lines: drops 1000 last lines
 		    						newText = "";
 		    						
-		    						for(int i=lines.length-5000;i<lines.length;i++)
+		    						for(int i=lines.length-4000;i<lines.length;i++)
 		    							newText = newText + lines[i];
 		    						
 		    						messagesText.setText(newText);
