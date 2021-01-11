@@ -65,11 +65,11 @@ public class HypercubeAboutDialog extends Dialog {
 		
 		Label lblNewLabel = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblNewLabel.setAlignment(SWT.CENTER);
-		lblNewLabel.setText(model.getAppName() + " " + model.getAppVersion() + " is developed\n by Tomas Ukkonen (© Copyright 2020).");
+		lblNewLabel.setText(model.getAppName() + " " + model.getAppVersion() + " is developed\n by Tomas Ukkonen (Â© Copyright 2020).");
 		
 		Label lblTheUserMust = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblTheUserMust.setAlignment(SWT.CENTER);
-		lblTheUserMust.setText("You can use this beta software freely, but please help me to get a job as Scientist or Data Scientist again. Mental health sector says I'm (a bit) crazy but it's their medicines that have made me crazy.");
+		lblTheUserMust.setText("You can use this beta software freely, but please help me to get a job as Scientist or Data Scientist again. Mental health sector says I'm (a bit) crazy but it's their medicines that have made me crazy. Wake me back to alive / Resurrect me if I'm dead!");
 		
 		Label lblHttpswwwnovelinsightbiz = new Label(shlAboutNovelInsight, SWT.NONE);
 		lblHttpswwwnovelinsightbiz.setAlignment(SWT.CENTER);
